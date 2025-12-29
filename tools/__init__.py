@@ -47,6 +47,11 @@ def main():
         if args.action is None:
             args.action = "first-launch"
 
+        if not actions.initializer.is_initialized(args) and \
+                args.action not in ("init", "container", "first-launch", "log", "bugreport"):
+            print('Waydroid is not initialized, run "waydroid init"')
+            return 0
+
         if args.action == "init":
             if args.client:
                 actions.remote_init_client(args)
